@@ -10,10 +10,10 @@ import java.util.Date;
 public class Note {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
 
-    @Column(name="userId")
+    @Column(name="user_id")
     public int userId;
 
     @Column(name = "title")

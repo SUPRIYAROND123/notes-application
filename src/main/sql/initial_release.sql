@@ -10,7 +10,7 @@ create table User (
 create table Note (
     id int primary key auto_increment,
     user_id int,
-    title varchar(8),
+    title varchar(50),
     note varchar(1000),
     last_update_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     create_time DATETIME DEFAULT CURRENT_TIMESTAMP

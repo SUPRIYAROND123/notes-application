@@ -11,4 +11,7 @@ public interface NoteRepository extends CrudRepository<Note, Integer> {
 
     List<Note> findAll();
 
+//    List<Note> findByUserId(int userId);
+//
+    void deleteById(int id);
 }

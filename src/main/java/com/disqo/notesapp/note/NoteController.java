@@ -10,7 +10,7 @@ public class NoteController {
     private NoteService noteService;
 
     @GetMapping("/note")
-    public Note getNote(@RequestParam int noteId, @RequestParam int userId) throws Exception {
+    public Note getNote(@RequestParam Integer noteId, @RequestParam Integer userId) throws Exception {
         return noteService.getNote(noteId, userId);
     }
 
@@ -25,7 +25,7 @@ public class NoteController {
     }
 
     @DeleteMapping("/note")
-    public String deleteNote(@RequestParam int noteId, @RequestParam int userId) throws Exception {
+    public String deleteNote(@RequestParam Integer noteId, @RequestParam Integer userId) throws Exception {
         noteService.deleteNote(noteId, userId);
         return "Note deleted successfully!";
     }

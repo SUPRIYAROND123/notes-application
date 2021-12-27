@@ -11,10 +11,10 @@ public class Note {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    private int id;
+    private Integer id;
 
     @Column(name="user_id")
-    public int userId;
+    public Integer userId;
 
     @Column(name = "title")
     public String title;

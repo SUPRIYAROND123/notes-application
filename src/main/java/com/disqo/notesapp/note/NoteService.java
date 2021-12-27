@@ -1,5 +1,9 @@
 package com.disqo.notesapp.note;
 
+import com.disqo.notesapp.exception.EmptyNoteException;
+import com.disqo.notesapp.exception.NoteAlreadyExistsException;
+import com.disqo.notesapp.exception.NoteNotFoundException;
+import com.disqo.notesapp.exception.UnauthorizedUserException;
 import javassist.NotFoundException;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -17,7 +21,7 @@ public class NoteService {
 
     public static final Logger logger = Logger.getLogger(NoteService.class.getName());
 
-    public Note getNote(int noteId, int userId) throws Exception {
+    public Note getNote(int noteId, int userId) {
         Note note = noteRepository.findById(noteId);
         if(note != null) {
             if(note.getUserId() == userId) {
@@ -25,43 +29,46 @@ public class NoteService {
             } else {
                 //401
                 logger.error("action=getNote,msg= Trying to get a note which is not authorized for the user, noteId=" + note.getId() + ", userId=" + note.getUserId());
-                throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+                throw new UnauthorizedUserException("Note is not authorized for user, userId=" + note.getUserId() + ", noteId=" + note.getId());
             }
         } else {
             logger.error("action=getNote,msg= Trying to get a note which doesn't exist");
-            throw new NotFoundException("Note with id=" + noteId + " is not found");
+            throw new NoteNotFoundException("Note with id=" + noteId + " is not found");
         }
     }
 
-    public void deleteNote(int noteId, int userId) throws Exception {
-        Note note = noteRepository.findById(noteId);
+    public void deleteNote(Integer noteId, Integer userId) throws Exception {
+        if(noteId==null || userId ==null) {
+            throw new NoteNotFoundException("Null noteId or userId");
+        }
+        Note note = noteRepository.findById(noteId.intValue());
         if(note != null) {
-            if(note.getUserId() == userId) {
+            if(note.getUserId().equals(userId)) {
                 noteRepository.deleteById(noteId);
             } else {
                 //401
                 logger.error("action=deleteNote,msg= Trying to delete a note which is not authorized for the user, noteId=" + note.getId() + ", userId=" + note.getUserId());
-                throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+                throw new UnauthorizedUserException("Note is not authorized for user, userId=" + note.getUserId() + ", noteId=" + note.getId());
             }
         } else {
             logger.error("action=deleteNote,msg= Trying to delete a note which doesn't exist");
-            throw new NotFoundException("Note with id=" + noteId + " is not found");
+            throw new NoteNotFoundException("Note with id=" + noteId + " is not found");
         }
     }
 
     public Note updateNote(Note note) {
-        if(note == null) {
+        if(note == null || note.getId()==null) {
             logger.error("action=updateNote,msg= Trying to update a note with null/empty note");
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+            throw new EmptyNoteException("Not a valid note");
         }
-        Note existingNote = noteRepository.findById(note.getId());
+        Note existingNote = noteRepository.findById(note.getId().intValue());
         if(existingNote == null) {
             logger.error("action=updateNote,msg= Trying to update a note which doesn't exist");
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
+            throw new NoteNotFoundException("Note with id=" + note.getId() + " is not found");
         }
-        if(existingNote.getUserId() != note.getUserId()) {
+        if(!existingNote.getUserId().equals(note.getUserId())) {
             logger.error("action=updateNote,msg= Trying to update a note which is note authorized for user, noteId=" + note.getId() + " and userId=" + note.getUserId());
-            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+            throw new UnauthorizedUserException("Note is not authorized for user, userId=" + note.getUserId() + ", noteId=" + note.getId());
         }
         existingNote.setNote(note.getNote());
         existingNote.setTitle(note.getTitle());
@@ -70,13 +77,13 @@ public class NoteService {
     }
 
     public Note addNote(Note note) {
-        if(note == null) {
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        if(note == null || note.getUserId()==null) {
+            throw new EmptyNoteException("Not a valid note");
         }
         try {
             Note existingNote = getNote(note.getId(), note.getUserId());
             if(existingNote != null) {
-                throw new WebApplicationException(Response.Status.BAD_REQUEST);
+                throw new NoteAlreadyExistsException("Note with noteId=" + note.getId() + " already exists");
             }
         } catch (Exception e) {
             logger.info("action=addNote,msg=Note with id="+note.getId() + " doesn't exist, creating a new note!");

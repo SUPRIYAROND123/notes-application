@@ -1,0 +1,12 @@
+C:\Users\supri\Desktop\Java related\notes-app\src\main\java\com\disqo\notesapp\exception\NoteNotFoundException.java
+C:\Users\supri\Desktop\Java related\notes-app\src\main\java\com\disqo\notesapp\note\NoteController.java
+C:\Users\supri\Desktop\Java related\notes-app\src\main\java\com\disqo\notesapp\exception\EmptyNoteException.java
+C:\Users\supri\Desktop\Java related\notes-app\src\main\java\com\disqo\notesapp\exception\UnauthorizedUserException.java
+C:\Users\supri\Desktop\Java related\notes-app\src\main\java\com\disqo\notesapp\security\SecurityConfig.java
+C:\Users\supri\Desktop\Java related\notes-app\src\main\java\com\disqo\notesapp\note\Note.java
+C:\Users\supri\Desktop\Java related\notes-app\src\main\java\com\disqo\notesapp\note\NoteDto.java
+C:\Users\supri\Desktop\Java related\notes-app\src\main\java\com\disqo\notesapp\NotesAppApplication.java
+C:\Users\supri\Desktop\Java related\notes-app\src\main\java\com\disqo\notesapp\note\NoteService.java
+C:\Users\supri\Desktop\Java related\notes-app\src\main\java\com\disqo\notesapp\user\UserController.java
+C:\Users\supri\Desktop\Java related\notes-app\src\main\java\com\disqo\notesapp\note\NoteRepository.java
+C:\Users\supri\Desktop\Java related\notes-app\src\main\java\com\disqo\notesapp\exception\NoteAlreadyExistsException.java

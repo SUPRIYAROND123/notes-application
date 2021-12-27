@@ -1,0 +1,12 @@
+com\disqo\notesapp\exception\EmptyNoteException.class
+com\disqo\notesapp\note\NoteService.class
+com\disqo\notesapp\note\NoteController.class
+com\disqo\notesapp\exception\NoteNotFoundException.class
+com\disqo\notesapp\user\UserController.class
+com\disqo\notesapp\note\Note.class
+com\disqo\notesapp\NotesAppApplication.class
+com\disqo\notesapp\note\NoteDto.class
+com\disqo\notesapp\exception\NoteAlreadyExistsException.class
+com\disqo\notesapp\security\SecurityConfig.class
+com\disqo\notesapp\exception\UnauthorizedUserException.class
+com\disqo\notesapp\note\NoteRepository.class

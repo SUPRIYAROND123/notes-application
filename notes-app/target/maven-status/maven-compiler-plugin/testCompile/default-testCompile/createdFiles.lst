@@ -1,0 +1,4 @@
+com\disqo\notesapp\NotesAppApplicationTests.class
+com\disqo\notesapp\note\NoteControllerTest.class
+com\disqo\notesapp\user\UserControllerIntegrationTest.class
+com\disqo\notesapp\user\UserControllerTest.class

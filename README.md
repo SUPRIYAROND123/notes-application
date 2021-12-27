@@ -1,5 +1,5 @@
 # notes-application
-Names app for DISQO
+Notes app for DISQO
 
 Java Engineer Assessment 
 Using a Java framework of your choice, build a RESTful Microservice for a “notes” application. Use MySql  or Postgres as your database to store the notes. Use multilayered architecture and demonstrate concepts  of OO design and design patterns (i.e. dependency injection, DAOs/Repositories, Services, …). 

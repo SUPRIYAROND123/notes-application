@@ -4,13 +4,11 @@ import com.disqo.notesapp.exception.EmptyNoteException;
 import com.disqo.notesapp.exception.NoteAlreadyExistsException;
 import com.disqo.notesapp.exception.NoteNotFoundException;
 import com.disqo.notesapp.exception.UnauthorizedUserException;
-import javassist.NotFoundException;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class NoteService {
@@ -74,6 +72,10 @@ public class NoteService {
         existingNote.setTitle(note.getTitle());
         existingNote.setLastUpdateTime(new Date());
         return noteRepository.save(existingNote);
+    }
+
+    public List<Note> findAllNotes() {
+        return noteRepository.findAll();
     }
 
     public Note addNote(Note note) {
